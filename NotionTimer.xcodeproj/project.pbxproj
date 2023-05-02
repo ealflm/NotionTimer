@@ -56,13 +56,13 @@
 		02F893B22A010645006FEE7C /* NotionTimer */ = {
 			isa = PBXGroup;
 			children = (
-				02F893B32A010645006FEE7C /* NotionTimerApp.swift */,
-				02F893B72A010647006FEE7C /* Assets.xcassets */,
 				02F893BC2A010647006FEE7C /* NotionTimer.entitlements */,
-				02F893B92A010647006FEE7C /* Preview Content */,
-				02F893C52A01134B006FEE7C /* Stopwatch.swift */,
-				02F893C72A013456006FEE7C /* SettingsView.swift */,
 				02F893C92A01468D006FEE7C /* AppSettings.swift */,
+				02F893B32A010645006FEE7C /* NotionTimerApp.swift */,
+				02F893C72A013456006FEE7C /* SettingsView.swift */,
+				02F893C52A01134B006FEE7C /* Stopwatch.swift */,
+				02F893B72A010647006FEE7C /* Assets.xcassets */,
+				02F893B92A010647006FEE7C /* Preview Content */,
 			);
 			path = NotionTimer;
 			sourceTree = "<group>";

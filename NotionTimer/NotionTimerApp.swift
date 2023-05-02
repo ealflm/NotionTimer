@@ -19,7 +19,7 @@ struct NotionTimerApp: App {
     }
 }
 
-class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDelegate, AppSettingsDelegate {
     @ObservedObject private var appSettings = AppSettings.shared
     var statusItem: NSStatusItem?
     let stopwatch = Stopwatch.shared
@@ -28,7 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         setupMenu()
         setupStopwatch()
-        print(appSettings.showIconInDock)
+        setupAppSettings()
     }
 
     func setupMenu() {
@@ -60,9 +60,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
         menu.delegate = self
         statusItem?.menu = menu
     }
+   
+    func setupAppSettings() {
+        appSettings.delegate = self
+    }
 
     func setupStopwatch() {
         stopwatch.delegate = self
+    }
+    // MARK: - AppSettingsDelegate
+
+    func didChangeShowIconInDock(to value: Bool) {
+        print("showIconInDock value change to: \(value)")
     }
 
     // MARK: - StopwatchDelegate
