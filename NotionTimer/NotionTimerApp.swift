@@ -40,14 +40,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
         button.title = "00:00"
 
         let menu = NSMenu()
-        
-        menu.addItem(NSMenuItem.separator())
+        menu.autoenablesItems = false
         
         let startPauseItem = NSMenuItem(title: "Start", action: #selector(startPauseStopwatch), keyEquivalent: "s")
         menu.addItem(startPauseItem)
         self.startPauseItem = startPauseItem
         
         let stopItem = NSMenuItem(title: "Stop", action: #selector(stopStopwatch), keyEquivalent: "t")
+        stopItem.isEnabled = false
         menu.addItem(stopItem)
         self.stopItem = stopItem
 
@@ -76,6 +76,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
     func setupStopwatch() {
         stopwatch.delegate = self
     }
+    
     // MARK: - AppSettingsDelegate
 
     func didChangeShowIconInDock(to value: Bool) {
@@ -122,11 +123,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
         } else {
             stopwatch.start()
             self.startPauseItem?.title = "Pause"
+            self.stopItem?.isEnabled = true
         }
     }
     
     @objc func stopStopwatch() {
         stopwatch.stop()
         self.startPauseItem?.title = "Start"
+        self.stopItem?.isEnabled = false
     }
 }
