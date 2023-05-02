@@ -42,9 +42,6 @@ class StatusMenuDelegate: NSObject, NSMenuDelegate, StopwatchDelegate {
         button.title = "00:00"
 
         let menu = NSMenu()
-        let openItem = NSMenuItem(title: "Open", action: #selector(openApp), keyEquivalent: "o")
-        openItem.target = self
-        menu.addItem(openItem)
         
         menu.addItem(NSMenuItem.separator())
         
@@ -57,6 +54,10 @@ class StatusMenuDelegate: NSObject, NSMenuDelegate, StopwatchDelegate {
         menu.addItem(stopItem)
 
         menu.addItem(NSMenuItem.separator())
+        
+        let settingsItem = NSMenuItem(title: "Settings", action: #selector(openSettings), keyEquivalent: ",")
+        settingsItem.target = self
+        menu.addItem(settingsItem)
         
         let quitItem = NSMenuItem(title: "Quit", action: #selector(quitApp), keyEquivalent: "q")
         quitItem.target = self
@@ -83,9 +84,9 @@ class StatusMenuDelegate: NSObject, NSMenuDelegate, StopwatchDelegate {
             self?.statusItem.button?.title = stopwatch.description
         }
     }
-
-    @objc func openApp() {
-        // Add code to open the main app window
+    
+    @objc func openSettings() {
+        // open settings view
     }
     
     @objc func quitApp() {

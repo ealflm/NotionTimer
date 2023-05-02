@@ -11,6 +11,7 @@
 		02F893B82A010647006FEE7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02F893B72A010647006FEE7C /* Assets.xcassets */; };
 		02F893BB2A010647006FEE7C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02F893BA2A010647006FEE7C /* Preview Assets.xcassets */; };
 		02F893C62A01134B006FEE7C /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F893C52A01134B006FEE7C /* Stopwatch.swift */; };
+		02F893C82A013456006FEE7C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F893C72A013456006FEE7C /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		02F893BA2A010647006FEE7C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		02F893BC2A010647006FEE7C /* NotionTimer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotionTimer.entitlements; sourceTree = "<group>"; };
 		02F893C52A01134B006FEE7C /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
+		02F893C72A013456006FEE7C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				02F893BC2A010647006FEE7C /* NotionTimer.entitlements */,
 				02F893B92A010647006FEE7C /* Preview Content */,
 				02F893C52A01134B006FEE7C /* Stopwatch.swift */,
+				02F893C72A013456006FEE7C /* SettingsView.swift */,
 			);
 			path = NotionTimer;
 			sourceTree = "<group>";
@@ -139,6 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02F893C82A013456006FEE7C /* SettingsView.swift in Sources */,
 				02F893C62A01134B006FEE7C /* Stopwatch.swift in Sources */,
 				02F893B42A010645006FEE7C /* NotionTimerApp.swift in Sources */,
 			);
