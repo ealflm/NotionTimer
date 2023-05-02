@@ -19,26 +19,18 @@ struct NotionTimerApp: App {
     }
 }
 
-class AppDelegate: NSObject, NSApplicationDelegate {
-    var statusMenuDelegate: StatusMenuDelegate?
+class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDelegate {
+    var statusItem: NSStatusItem?
+    let stopwatch = Stopwatch.shared
     
     func applicationDidFinishLaunching(_ notification: Notification) {
-        statusMenuDelegate = StatusMenuDelegate()
-    }
-}
-
-class StatusMenuDelegate: NSObject, NSMenuDelegate, StopwatchDelegate {
-    let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-    let stopwatch = Stopwatch.shared
-
-    override init() {
-        super.init()
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         setupMenu()
         setupStopwatch()
     }
 
     func setupMenu() {
-        guard let button = statusItem.button else { return }
+        guard let button = statusItem?.button else { return }
         button.title = "00:00"
 
         let menu = NSMenu()
@@ -64,7 +56,7 @@ class StatusMenuDelegate: NSObject, NSMenuDelegate, StopwatchDelegate {
         menu.addItem(quitItem)
         
         menu.delegate = self
-        statusItem.menu = menu
+        statusItem?.menu = menu
     }
 
     func setupStopwatch() {
@@ -81,7 +73,7 @@ class StatusMenuDelegate: NSObject, NSMenuDelegate, StopwatchDelegate {
 
     func didChange(_ stopwatch: Stopwatch) {
         DispatchQueue.main.async { [weak self] in
-            self?.statusItem.button?.title = stopwatch.description
+            self?.statusItem?.button?.title = stopwatch.description
         }
     }
     
