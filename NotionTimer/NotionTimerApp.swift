@@ -63,6 +63,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
    
     func setupAppSettings() {
         appSettings.delegate = self
+        if (appSettings.showIconInDock) {
+            NSApp.setActivationPolicy(.regular)
+        } else {
+            NSApp.setActivationPolicy(.accessory)
+            NSApplication.shared.activate(ignoringOtherApps: true)
+        }
     }
 
     func setupStopwatch() {
@@ -71,7 +77,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
     // MARK: - AppSettingsDelegate
 
     func didChangeShowIconInDock(to value: Bool) {
-        print("showIconInDock value change to: \(value)")
+        if (value) {
+            NSApp.setActivationPolicy(.regular)
+        } else {
+            NSApp.setActivationPolicy(.accessory)
+            NSApplication.shared.activate(ignoringOtherApps: true)
+        }
     }
 
     // MARK: - StopwatchDelegate
@@ -94,6 +105,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
         settingsWindow.title = "Settings"
         settingsWindow.styleMask = [.closable, .miniaturizable, .resizable, .titled]
         settingsWindow.center()
+        settingsWindow.level = .floating
         NSWindowController(window: settingsWindow).showWindow(nil)
     }
     
