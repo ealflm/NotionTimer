@@ -20,6 +20,7 @@ struct NotionTimerApp: App {
 }
 
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDelegate {
+    @ObservedObject private var appSettings = AppSettings.shared
     var statusItem: NSStatusItem?
     let stopwatch = Stopwatch.shared
     
@@ -27,6 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         setupMenu()
         setupStopwatch()
+        print(appSettings.showIconInDock)
     }
 
     func setupMenu() {
@@ -78,7 +80,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
     }
     
     @objc func openSettings() {
-        // open settings view
+        let settingsView = SettingsView()
+        let settingsWindow = NSWindow(contentViewController: NSHostingController(rootView: settingsView))
+        settingsWindow.title = "Settings"
+        settingsWindow.styleMask = [.closable, .miniaturizable, .resizable, .titled]
+        settingsWindow.center()
+        NSWindowController(window: settingsWindow).showWindow(nil)
     }
     
     @objc func quitApp() {

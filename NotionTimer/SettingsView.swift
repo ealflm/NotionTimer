@@ -8,13 +8,27 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @ObservedObject private var appSettings = AppSettings.shared
+
     var body: some View {
         VStack {
-            Text("Settings")
-                .font(.title)
+            HStack {
+                Text("Show application icon in the dock")
+                    .padding(.leading)
+                Spacer()
+                Toggle("", isOn: $appSettings.showIconInDock)
+                    .labelsHidden()
+                    .toggleStyle(SwitchToggleStyle())
+                    .padding(.trailing)
+            }
+            .padding(.vertical, 4)
+            .padding(.horizontal, 4)
+
             Spacer()
         }
-        .padding()
+        .padding(.vertical, 8)
+        .padding(.horizontal, 6)
+        .frame(minWidth: 450, maxWidth: 700, minHeight: 300, maxHeight: 500)
     }
 }
 
