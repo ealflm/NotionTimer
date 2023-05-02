@@ -92,6 +92,7 @@ class Stopwatch {
         timer = nil
 
         delegate?.didPause(self)
+        delegate?.didChange(self)
     }
 
     func reset(_ value: TimeInterval) {
@@ -109,6 +110,7 @@ class Stopwatch {
         timer?.cancel()
         timer = nil
 
+        delegate?.didChange(self)
         delegate?.didStop(self, withValue: value)
     }
 

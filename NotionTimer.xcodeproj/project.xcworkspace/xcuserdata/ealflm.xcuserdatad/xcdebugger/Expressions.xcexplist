@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "AppDelegate.setupMenu():NotionTimerApp.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "stopItem.isEnabled">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AppDelegate.startPauseStopwatch():NotionTimerApp.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.stopItem?.isEnabled">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

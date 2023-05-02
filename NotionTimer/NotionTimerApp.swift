@@ -24,6 +24,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
     var statusItem: NSStatusItem?
     let stopwatch = Stopwatch.shared
     
+    // Menu items
+    var startPauseItem: NSMenuItem?
+    var stopItem: NSMenuItem?
+    
     func applicationDidFinishLaunching(_ notification: Notification) {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         setupMenu()
@@ -39,22 +43,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
         
         menu.addItem(NSMenuItem.separator())
         
-        let startPauseItem = NSMenuItem(title: "Start/Pause", action: #selector(startPauseStopwatch), keyEquivalent: "s")
-        startPauseItem.target = self
+        let startPauseItem = NSMenuItem(title: "Start", action: #selector(startPauseStopwatch), keyEquivalent: "s")
         menu.addItem(startPauseItem)
+        self.startPauseItem = startPauseItem
         
         let stopItem = NSMenuItem(title: "Stop", action: #selector(stopStopwatch), keyEquivalent: "t")
-        stopItem.target = self
         menu.addItem(stopItem)
+        self.stopItem = stopItem
 
         menu.addItem(NSMenuItem.separator())
         
         let settingsItem = NSMenuItem(title: "Settings", action: #selector(openSettings), keyEquivalent: ",")
-        settingsItem.target = self
         menu.addItem(settingsItem)
         
         let quitItem = NSMenuItem(title: "Quit", action: #selector(quitApp), keyEquivalent: "q")
-        quitItem.target = self
         menu.addItem(quitItem)
         
         menu.delegate = self
@@ -116,12 +118,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
     @objc func startPauseStopwatch() {
         if stopwatch.isActive {
             stopwatch.pause()
+            self.startPauseItem?.title = "Start"
         } else {
             stopwatch.start()
+            self.startPauseItem?.title = "Pause"
         }
     }
     
     @objc func stopStopwatch() {
         stopwatch.stop()
+        self.startPauseItem?.title = "Start"
     }
 }
