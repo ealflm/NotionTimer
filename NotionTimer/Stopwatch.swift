@@ -17,11 +17,11 @@ protocol StopwatchDelegate: AnyObject {
 class Stopwatch {
     static let shared = Stopwatch()
     
-    weak var delegate: StopwatchDelegate?
     private(set) var timer: DispatchSourceTimer?
     private var reference: Date
     private var accum: TimeInterval
-
+    public var multicastDelegate = MulticastDelegate<StopwatchDelegate>()
+    
     init() {
         self.timer = nil
         self.reference = Date()
@@ -30,9 +30,9 @@ class Stopwatch {
     
     convenience init(delegate: StopwatchDelegate) {
         self.init()
-        self.delegate = delegate
+        self.addDelegate(delegate)
     }
-
+    
     var description: String {
         let seconds = Int(floor(value))
         let hours = seconds / 3600
@@ -45,29 +45,37 @@ class Stopwatch {
             return String(format: "%02d:%02d", minutes, remainingSeconds)
         }
     }
-
+    
     var value: TimeInterval {
         if timer == nil {
             return accum
         }
         return Date().timeIntervalSince(reference) + accum
     }
-
+    
     var isActive: Bool {
         return timer != nil
     }
-
+    
     var isPaused: Bool {
         return timer == nil && accum > 0
     }
-
+    
     var isStopped: Bool {
         return timer == nil && accum == 0
     }
-
+    
+    func addDelegate(_ delegate: StopwatchDelegate) {
+        multicastDelegate.addDelegate(delegate)
+    }
+    
+    func removeDelegate(_ delegate: StopwatchDelegate) {
+        multicastDelegate.removeDelegate(delegate)
+    }
+    
     func start() {
         guard !isActive else { return }
-
+        
         reference = Date()
         
         let queue = DispatchQueue.global(qos: .default)
@@ -79,44 +87,44 @@ class Stopwatch {
             }
         }
         timer?.resume()
-
-        delegate?.didStart(self)
-        delegate?.didChange(self)
+        
+        multicastDelegate.invokeDelegates { $0.didStart(self) }
+        multicastDelegate.invokeDelegates { $0.didChange(self) }
     }
-
+    
     func pause() {
         guard !isPaused else { return }
-
+        
         accum = value
         timer?.cancel()
         timer = nil
-
-        delegate?.didPause(self)
-        delegate?.didChange(self)
+        
+        multicastDelegate.invokeDelegates { $0.didPause(self) }
+        multicastDelegate.invokeDelegates { $0.didChange(self) }
     }
-
+    
     func reset(_ value: TimeInterval) {
         accum = value
         reference = Date()
-
-        delegate?.didChange(self)
+        
+        multicastDelegate.invokeDelegates { $0.didChange(self) }
     }
-
+    
     func stop() {
         guard !isStopped else { return }
-
+        
         let value = self.value
         accum = 0
         timer?.cancel()
         timer = nil
-
-        delegate?.didChange(self)
-        delegate?.didStop(self, withValue: value)
+        
+        multicastDelegate.invokeDelegates { $0.didChange(self) }
+        multicastDelegate.invokeDelegates { $0.didStop(self, withValue: value) }
     }
-
+    
     // MARK: - Private
-
+    
     private func tick() {
-        delegate?.didChange(self)
+        multicastDelegate.invokeDelegates { $0.didChange(self) }
     }
 }

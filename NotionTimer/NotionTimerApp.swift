@@ -28,17 +28,58 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
     var startPauseItem: NSMenuItem?
     var stopItem: NSMenuItem?
     
+    // Overlay
+    var overlayPanel: FloatingPanel?
+    
+    private let marginRight: CGFloat = 16
+    private let marginTop: CGFloat = 42
+    
     func applicationDidFinishLaunching(_ notification: Notification) {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         setupMenu()
         setupStopwatch()
         setupAppSettings()
+        setupOverlay()
     }
-
+    
+    func setupOverlay() {
+        let overlayView = NSHostingController(rootView: OverlayView(viewModel: StopwatchViewModel(stopwatch: Stopwatch.shared)))
+        
+        let panel = FloatingPanel(contentRect: CGRect(x: 0, y: 0, width: 400, height: 100), styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: false)
+        panel.contentView = overlayView.view
+        panel.hasShadow = false
+        panel.backgroundColor = .clear
+        panel.isOpaque = false
+        panel.ignoresMouseEvents = true
+        panel.level = .floating
+        panel.collectionBehavior = [.canJoinAllSpaces, .stationary, .ignoresCycle]
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(panelFrameDidChange), name: NSView.frameDidChangeNotification, object: panel.contentView)
+        
+        updatePanelPosition(panel)
+        
+        panel.orderFrontRegardless()
+        overlayPanel = panel
+    }
+    
+    private func updatePanelPosition(_ panel: NSPanel) {
+        let screenSize = NSScreen.main?.frame ?? .zero
+        
+        let panelX = screenSize.width - panel.frame.width - marginRight
+        let panelY = screenSize.height - panel.frame.height - marginTop
+        panel.setFrameOrigin(CGPoint(x: panelX, y: panelY))
+    }
+    
+    @objc func panelFrameDidChange(_ notification: Notification) {
+        if let panel = overlayPanel {
+            updatePanelPosition(panel)
+        }
+    }
+    
     func setupMenu() {
         guard let button = statusItem?.button else { return }
         button.title = "00:00"
-
+        
         let menu = NSMenu()
         menu.autoenablesItems = false
         
@@ -50,7 +91,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
         stopItem.isEnabled = false
         menu.addItem(stopItem)
         self.stopItem = stopItem
-
+        
         menu.addItem(NSMenuItem.separator())
         
         let settingsItem = NSMenuItem(title: "Settings", action: #selector(openSettings), keyEquivalent: ",")
@@ -62,7 +103,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
         menu.delegate = self
         statusItem?.menu = menu
     }
-   
+    
     func setupAppSettings() {
         appSettings.delegate = self
         if (appSettings.showIconInDock) {
@@ -71,13 +112,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
             NSApp.setActivationPolicy(.accessory)
         }
     }
-
+    
     func setupStopwatch() {
-        stopwatch.delegate = self
+        stopwatch.multicastDelegate.addDelegate(self)
     }
     
     // MARK: - AppSettingsDelegate
-
+    
     func didChangeShowIconInDock(to value: Bool) {
         if (value) {
             NSApp.setActivationPolicy(.regular)
@@ -86,15 +127,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
             NSApplication.shared.activate(ignoringOtherApps: true)
         }
     }
-
+    
     // MARK: - StopwatchDelegate
-
+    
     func didStart(_ stopwatch: Stopwatch) {}
-
+    
     func didPause(_ stopwatch: Stopwatch) {}
-
+    
     func didStop(_ stopwatch: Stopwatch, withValue value: TimeInterval) {}
-
+    
     func didChange(_ stopwatch: Stopwatch) {
         DispatchQueue.main.async { [weak self] in
             self?.statusItem?.button?.title = stopwatch.description
@@ -115,7 +156,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
     @objc func quitApp() {
         NSApplication.shared.terminate(nil)
     }
-
+    
     @objc func startPauseStopwatch() {
         if stopwatch.isActive {
             stopwatch.pause()
