@@ -50,7 +50,7 @@ class Stopwatch {
         if timer == nil {
             return accum
         }
-        return Date().timeIntervalSince(reference) + accum + 10000
+        return Date().timeIntervalSince(reference) + accum
     }
     
     var isActive: Bool {
