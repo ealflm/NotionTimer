@@ -12,34 +12,38 @@ struct SettingsView: View {
 
     var body: some View {
         VStack {
-            HStack {
-                Text("Show application icon in the dock")
-                    .padding(.leading)
-                Spacer()
-                Toggle("", isOn: $appSettings.showIconInDock)
-                    .labelsHidden()
-                    .toggleStyle(SwitchToggleStyle())
-                    .padding(.trailing)
-            }
-            .padding(.vertical, 4)
-            .padding(.horizontal, 4)
-            
-            HStack {
-                Text("Show overlay window")
-                    .padding(.leading)
-                Spacer()
-                Toggle("", isOn: $appSettings.showOverlayWindow)
-                    .labelsHidden()
-                    .toggleStyle(SwitchToggleStyle())
-                    .padding(.trailing)
-            }
-            .padding(.vertical, 4)
-            .padding(.horizontal, 4)
+            VStack {
+                HStack {
+                    Text("Show application icon in the dock")
+                    Spacer()
+                    Toggle("", isOn: $appSettings.showIconInDock)
+                        .labelsHidden()
+                        .toggleStyle(SwitchToggleStyle())
+                        .scaleEffect(0.8)
+                }
 
+                Divider() // Add the divider here
+
+                HStack {
+                    Text("Show overlay window")
+                    Spacer()
+                    Toggle("", isOn: $appSettings.showOverlayWindow)
+                        .labelsHidden()
+                        .toggleStyle(SwitchToggleStyle())
+                        .scaleEffect(0.8)
+                }
+            }
+            .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+            .background(Color.gray.opacity(0.05)) // Add the gray background here
+            .clipShape(RoundedRectangle(cornerRadius: 5)) // Add rounded corners here
+            .overlay(
+                RoundedRectangle(cornerRadius: 5) // Add the rounded border here
+                    .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+            )
             Spacer()
         }
-        .padding(.vertical, 8)
-        .padding(.horizontal, 6)
+        .padding(.vertical, 17)
+        .padding(.horizontal, 15)
         .frame(minWidth: 450, maxWidth: 700, minHeight: 300, maxHeight: 500)
     }
 }
