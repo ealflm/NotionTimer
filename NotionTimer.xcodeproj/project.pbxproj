@@ -67,6 +67,7 @@
 				02F893BC2A010647006FEE7C /* NotionTimer.entitlements */,
 				02F893C92A01468D006FEE7C /* AppSettings.swift */,
 				02CCF4022A01E2EB00401C16 /* FloatingPanel.swift */,
+				02CCF4072A02050700401C16 /* MulticastDelegate.swift */,
 				02F893B32A010645006FEE7C /* NotionTimerApp.swift */,
 				02CCF3FE2A01E1C800401C16 /* OverlayView.swift */,
 				02F893C72A013456006FEE7C /* SettingsView.swift */,
@@ -74,7 +75,6 @@
 				02CCF4052A02034D00401C16 /* StopwatchViewModel.swift */,
 				02F893B72A010647006FEE7C /* Assets.xcassets */,
 				02F893B92A010647006FEE7C /* Preview Content */,
-				02CCF4072A02050700401C16 /* MulticastDelegate.swift */,
 			);
 			path = NotionTimer;
 			sourceTree = "<group>";

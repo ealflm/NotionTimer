@@ -45,7 +45,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
     func setupOverlay() {
         let overlayView = NSHostingController(rootView: OverlayView(viewModel: StopwatchViewModel(stopwatch: Stopwatch.shared)))
         
-        let panel = FloatingPanel(contentRect: CGRect(x: 0, y: 0, width: 400, height: 100), styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: false)
+        let panel = FloatingPanel(contentRect: CGRect(x: 0, y: 0, width: 200, height: 80), styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: false)
         panel.contentView = overlayView.view
         panel.hasShadow = false
         panel.backgroundColor = .clear
@@ -78,7 +78,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
     
     func setupMenu() {
         guard let button = statusItem?.button else { return }
-        button.title = "00:00"
+        button.title = "00:00:00"
         
         let menu = NSMenu()
         menu.autoenablesItems = false
@@ -138,7 +138,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
     
     func didChange(_ stopwatch: Stopwatch) {
         DispatchQueue.main.async { [weak self] in
-            self?.statusItem?.button?.title = stopwatch.description
+            let description = stopwatch.description
+            let width: CGFloat = description.count <= 5 ? 57 : 77
+            self?.statusItem?.button?.title = description
+            self?.statusItem?.button?.frame.size.width = width
         }
     }
     

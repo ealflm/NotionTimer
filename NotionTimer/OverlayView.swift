@@ -11,12 +11,21 @@ struct OverlayView: View {
     @ObservedObject var viewModel: StopwatchViewModel
 
     var body: some View {
-        Text(viewModel.description)
-            .font(.system(size: 48))
-            .padding()
-            .background(Color.black.opacity(0.3))
-            .foregroundColor(.white)
-            .cornerRadius(10)
+        let frameWidth = viewModel.description.count <= 5 ? 200 : 267
+        
+        ZStack {
+            Color.black.opacity(0.3)
+                .frame(width: CGFloat(frameWidth))
+                .frame(height: 80)
+                .cornerRadius(10)
+            
+            Text(viewModel.description)
+                .font(.system(size: 48))
+                .multilineTextAlignment(.center)
+                .padding()
+                .foregroundColor(.white)
+                .cornerRadius(10)
+        }
     }
 }
 
