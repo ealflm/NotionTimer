@@ -19,6 +19,9 @@ struct NotionTimerApp: App {
     }
 }
 
+import SwiftUI
+import AppKit
+
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDelegate, AppSettingsDelegate {
     @ObservedObject private var appSettings = AppSettings.shared
     var statusItem: NSStatusItem?
@@ -38,8 +41,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         setupMenu()
         setupStopwatch()
-        setupAppSettings()
         setupOverlay()
+        setupAppSettings()
     }
     
     func setupOverlay() {
@@ -111,6 +114,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
         } else {
             NSApp.setActivationPolicy(.accessory)
         }
+        updateOverlayVisibility()
     }
     
     func setupStopwatch() {
@@ -125,6 +129,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
         } else {
             NSApp.setActivationPolicy(.accessory)
             NSApplication.shared.activate(ignoringOtherApps: true)
+        }
+    }
+    
+    func didChangeShowOverlayWindow(to value: Bool) {
+        updateOverlayVisibility()
+    }
+    
+    func updateOverlayVisibility() {
+        if appSettings.showOverlayWindow {
+            overlayPanel?.orderFrontRegardless()
+        } else {
+            overlayPanel?.orderOut(nil)
         }
     }
     

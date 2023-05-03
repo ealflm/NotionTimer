@@ -9,6 +9,7 @@ import Foundation
 
 protocol AppSettingsDelegate: AnyObject {
     func didChangeShowIconInDock(to value: Bool)
+    func didChangeShowOverlayWindow(to value: Bool)
 }
 
 class AppSettings: ObservableObject {
@@ -22,8 +23,16 @@ class AppSettings: ObservableObject {
             delegate?.didChangeShowIconInDock(to: showIconInDock)
         }
     }
+    
+    @Published var showOverlayWindow: Bool {
+        didSet {
+            UserDefaults.standard.set(showOverlayWindow, forKey: "showOverlayWindow")
+            delegate?.didChangeShowOverlayWindow(to: showOverlayWindow)
+        }
+    }
 
     private init() {
         showIconInDock = UserDefaults.standard.bool(forKey: "showIconInDock")
+        showOverlayWindow = UserDefaults.standard.bool(forKey: "showOverlayWindow")
     }
 }

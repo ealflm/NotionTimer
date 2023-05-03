@@ -23,6 +23,18 @@ struct SettingsView: View {
             }
             .padding(.vertical, 4)
             .padding(.horizontal, 4)
+            
+            HStack {
+                Text("Show overlay window")
+                    .padding(.leading)
+                Spacer()
+                Toggle("", isOn: $appSettings.showOverlayWindow)
+                    .labelsHidden()
+                    .toggleStyle(SwitchToggleStyle())
+                    .padding(.trailing)
+            }
+            .padding(.vertical, 4)
+            .padding(.horizontal, 4)
 
             Spacer()
         }
