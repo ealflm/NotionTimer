@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02BCAB902A028C8A00AACC42 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 02BCAB8F2A028C8A00AACC42 /* Starscream */; };
 		02CCF3FF2A01E1C800401C16 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCF3FE2A01E1C800401C16 /* OverlayView.swift */; };
 		02CCF4032A01E2EB00401C16 /* FloatingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCF4022A01E2EB00401C16 /* FloatingPanel.swift */; };
 		02CCF4062A02034D00401C16 /* StopwatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCF4052A02034D00401C16 /* StopwatchViewModel.swift */; };
@@ -39,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02BCAB902A028C8A00AACC42 /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +105,9 @@
 			dependencies = (
 			);
 			name = NotionTimer;
+			packageProductDependencies = (
+				02BCAB8F2A028C8A00AACC42 /* Starscream */,
+			);
 			productName = NotionTimer;
 			productReference = 02F893B02A010645006FEE7C /* NotionTimer.app */;
 			productType = "com.apple.product-type.application";
@@ -131,6 +136,9 @@
 				Base,
 			);
 			mainGroup = 02F893A72A010645006FEE7C;
+			packageReferences = (
+				02BCAB8E2A028C8A00AACC42 /* XCRemoteSwiftPackageReference "Starscream" */,
+			);
 			productRefGroup = 02F893B12A010645006FEE7C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -360,6 +368,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		02BCAB8E2A028C8A00AACC42 /* XCRemoteSwiftPackageReference "Starscream" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/daltoniam/Starscream.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		02BCAB8F2A028C8A00AACC42 /* Starscream */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02BCAB8E2A028C8A00AACC42 /* XCRemoteSwiftPackageReference "Starscream" */;
+			productName = Starscream;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 02F893A82A010645006FEE7C /* Project object */;
 }

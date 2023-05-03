@@ -19,30 +19,34 @@ struct NotionTimerApp: App {
     }
 }
 
-import SwiftUI
-import AppKit
-
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDelegate, AppSettingsDelegate {
     @ObservedObject private var appSettings = AppSettings.shared
-    var statusItem: NSStatusItem?
-    let stopwatch = Stopwatch.shared
-    
-    // Menu items
-    var startPauseItem: NSMenuItem?
-    var stopItem: NSMenuItem?
-    
-    // Overlay
-    var overlayPanel: FloatingPanel?
-    
+        
     private let marginRight: CGFloat = 16
     private let marginTop: CGFloat = 42
     
+    var statusItem: NSStatusItem?
+    let stopwatch = Stopwatch.shared
+    var startPauseItem: NSMenuItem?
+    var stopItem: NSMenuItem?
+    var overlayPanel: FloatingPanel?
+
+    // MARK: - ApplicationDidFinishLaunching
     func applicationDidFinishLaunching(_ notification: Notification) {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         setupMenu()
         setupStopwatch()
         setupOverlay()
         setupAppSettings()
+    }
+    
+    // MARK: - Setup panel
+    private func updatePanelPosition(_ panel: NSPanel) {
+        let screenSize = NSScreen.main?.frame ?? .zero
+        
+        let panelX = screenSize.width - panel.frame.width - marginRight
+        let panelY = screenSize.height - panel.frame.height - marginTop
+        panel.setFrameOrigin(CGPoint(x: panelX, y: panelY))
     }
     
     func setupOverlay() {
@@ -65,20 +69,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
         overlayPanel = panel
     }
     
-    private func updatePanelPosition(_ panel: NSPanel) {
-        let screenSize = NSScreen.main?.frame ?? .zero
-        
-        let panelX = screenSize.width - panel.frame.width - marginRight
-        let panelY = screenSize.height - panel.frame.height - marginTop
-        panel.setFrameOrigin(CGPoint(x: panelX, y: panelY))
-    }
-    
-    @objc func panelFrameDidChange(_ notification: Notification) {
-        if let panel = overlayPanel {
-            updatePanelPosition(panel)
-        }
-    }
-    
+    // MARK: - Setup menu
     func setupMenu() {
         guard let button = statusItem?.button else { return }
         button.title = "00:00"
@@ -107,6 +98,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
         statusItem?.menu = menu
     }
     
+    // MARK: - Setup app settings
     func setupAppSettings() {
         appSettings.delegate = self
         if (appSettings.showIconInDock) {
@@ -121,8 +113,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
         stopwatch.multicastDelegate.addDelegate(self)
     }
     
-    // MARK: - AppSettingsDelegate
+    // MARK: - Panel delegate
+    @objc func panelFrameDidChange(_ notification: Notification) {
+        if let panel = overlayPanel {
+            updatePanelPosition(panel)
+        }
+    }
     
+    // MARK: - App settings delegate
     func didChangeShowIconInDock(to value: Bool) {
         if (value) {
             NSApp.setActivationPolicy(.regular)
@@ -144,7 +142,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
         }
     }
     
-    // MARK: - StopwatchDelegate
+    // MARK: - Stopwatch delegate
     
     func didStart(_ stopwatch: Stopwatch) {}
     
@@ -161,21 +159,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
         }
     }
     
-    @objc func openSettings() {
-        let settingsView = SettingsView()
-        let settingsWindow = NSWindow(contentViewController: NSHostingController(rootView: settingsView))
-        settingsWindow.title = "Settings"
-        settingsWindow.styleMask = [.closable, .miniaturizable, .resizable, .titled]
-        settingsWindow.center()
-        settingsWindow.level = .floating
-        NSWindowController(window: settingsWindow).showWindow(nil)
-        NSApplication.shared.activate(ignoringOtherApps: true)
-    }
-    
-    @objc func quitApp() {
-        NSApplication.shared.terminate(nil)
-    }
-    
+    // MARK: - Action
     @objc func startPauseStopwatch() {
         if stopwatch.isActive {
             stopwatch.pause()
@@ -191,5 +175,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
         stopwatch.stop()
         self.startPauseItem?.title = "Start"
         self.stopItem?.isEnabled = false
+    }
+    
+    @objc func openSettings() {
+        let settingsView = SettingsView()
+        let settingsWindow = NSWindow(contentViewController: NSHostingController(rootView: settingsView))
+        settingsWindow.title = "Settings"
+        settingsWindow.styleMask = [.closable, .miniaturizable, .resizable, .titled]
+        settingsWindow.center()
+        settingsWindow.level = .floating
+        NSWindowController(window: settingsWindow).showWindow(nil)
+        NSApplication.shared.activate(ignoringOtherApps: true)
+    }
+    
+    @objc func quitApp() {
+        NSApplication.shared.terminate(nil)
     }
 }
