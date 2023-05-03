@@ -143,7 +143,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
     }
     
     // MARK: - Stopwatch delegate
-    
     func didStart(_ stopwatch: Stopwatch) {}
     
     func didPause(_ stopwatch: Stopwatch) {}
