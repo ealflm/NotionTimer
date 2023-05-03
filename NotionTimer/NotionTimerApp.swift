@@ -69,7 +69,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
             NSApp.setActivationPolicy(.regular)
         } else {
             NSApp.setActivationPolicy(.accessory)
-            NSApplication.shared.activate(ignoringOtherApps: true)
         }
     }
 
@@ -110,6 +109,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
         settingsWindow.center()
         settingsWindow.level = .floating
         NSWindowController(window: settingsWindow).showWindow(nil)
+        NSApplication.shared.activate(ignoringOtherApps: true)
     }
     
     @objc func quitApp() {
