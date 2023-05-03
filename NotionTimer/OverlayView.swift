@@ -11,16 +11,16 @@ struct OverlayView: View {
     @ObservedObject var viewModel: StopwatchViewModel
 
     var body: some View {
-        let frameWidth = viewModel.description.count <= 5 ? 200 : 267
+        let frameWidth = viewModel.description.count <= 5 ? 200 : 287
         
         ZStack {
-            Color.black.opacity(0.3)
+            Color.black.opacity(0.2)
                 .frame(width: CGFloat(frameWidth))
                 .frame(height: 80)
                 .cornerRadius(10)
             
             Text(viewModel.description)
-                .font(.system(size: 48))
+                .font(.custom("Courier New", size: 48))
                 .multilineTextAlignment(.center)
                 .padding()
                 .foregroundColor(.white)
