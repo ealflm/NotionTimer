@@ -78,7 +78,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
     
     func setupMenu() {
         guard let button = statusItem?.button else { return }
-        button.title = "00:00:00"
+        button.title = "00:00"
         
         let menu = NSMenu()
         menu.autoenablesItems = false
