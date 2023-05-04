@@ -11,6 +11,7 @@
 		02CCF4032A01E2EB00401C16 /* FloatingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCF4022A01E2EB00401C16 /* FloatingPanel.swift */; };
 		02CCF4062A02034D00401C16 /* StopwatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCF4052A02034D00401C16 /* StopwatchViewModel.swift */; };
 		02CCF4082A02050700401C16 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCF4072A02050700401C16 /* MulticastDelegate.swift */; };
+		02F6797E2A03E4F00050CAE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F6797D2A03E4F00050CAE7 /* AppDelegate.swift */; };
 		02F893B42A010645006FEE7C /* NotionTimerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F893B32A010645006FEE7C /* NotionTimerApp.swift */; };
 		02F893B82A010647006FEE7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02F893B72A010647006FEE7C /* Assets.xcassets */; };
 		02F893BB2A010647006FEE7C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02F893BA2A010647006FEE7C /* Preview Assets.xcassets */; };
@@ -24,6 +25,7 @@
 		02CCF4022A01E2EB00401C16 /* FloatingPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanel.swift; sourceTree = "<group>"; };
 		02CCF4052A02034D00401C16 /* StopwatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchViewModel.swift; sourceTree = "<group>"; };
 		02CCF4072A02050700401C16 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
+		02F6797D2A03E4F00050CAE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02F893B02A010645006FEE7C /* NotionTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotionTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02F893B32A010645006FEE7C /* NotionTimerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotionTimerApp.swift; sourceTree = "<group>"; };
 		02F893B72A010647006FEE7C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -45,6 +47,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02F679742A03E4060050CAE7 /* Stopwatch */ = {
+			isa = PBXGroup;
+			children = (
+				02F893C52A01134B006FEE7C /* Stopwatch.swift */,
+				02CCF4072A02050700401C16 /* MulticastDelegate.swift */,
+				02CCF4052A02034D00401C16 /* StopwatchViewModel.swift */,
+			);
+			name = Stopwatch;
+			sourceTree = "<group>";
+		};
+		02F679752A03E4380050CAE7 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				02F893B32A010645006FEE7C /* NotionTimerApp.swift */,
+				02F6797D2A03E4F00050CAE7 /* AppDelegate.swift */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		02F6797B2A03E4940050CAE7 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				02F893C92A01468D006FEE7C /* AppSettings.swift */,
+				02F893C72A013456006FEE7C /* SettingsView.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		02F6797C2A03E4C90050CAE7 /* Overlay */ = {
+			isa = PBXGroup;
+			children = (
+				02CCF4022A01E2EB00401C16 /* FloatingPanel.swift */,
+				02CCF3FE2A01E1C800401C16 /* OverlayView.swift */,
+			);
+			name = Overlay;
+			sourceTree = "<group>";
+		};
 		02F893A72A010645006FEE7C = {
 			isa = PBXGroup;
 			children = (
@@ -65,16 +104,12 @@
 			isa = PBXGroup;
 			children = (
 				02F893BC2A010647006FEE7C /* NotionTimer.entitlements */,
-				02F893C92A01468D006FEE7C /* AppSettings.swift */,
-				02CCF4022A01E2EB00401C16 /* FloatingPanel.swift */,
-				02CCF4072A02050700401C16 /* MulticastDelegate.swift */,
-				02F893B32A010645006FEE7C /* NotionTimerApp.swift */,
-				02CCF3FE2A01E1C800401C16 /* OverlayView.swift */,
-				02F893C72A013456006FEE7C /* SettingsView.swift */,
-				02F893C52A01134B006FEE7C /* Stopwatch.swift */,
-				02CCF4052A02034D00401C16 /* StopwatchViewModel.swift */,
 				02F893B72A010647006FEE7C /* Assets.xcassets */,
+				02F679752A03E4380050CAE7 /* Main */,
+				02F6797C2A03E4C90050CAE7 /* Overlay */,
 				02F893B92A010647006FEE7C /* Preview Content */,
+				02F6797B2A03E4940050CAE7 /* Settings */,
+				02F679742A03E4060050CAE7 /* Stopwatch */,
 			);
 			path = NotionTimer;
 			sourceTree = "<group>";
@@ -164,6 +199,7 @@
 				02F893C82A013456006FEE7C /* SettingsView.swift in Sources */,
 				02F893C62A01134B006FEE7C /* Stopwatch.swift in Sources */,
 				02CCF4032A01E2EB00401C16 /* FloatingPanel.swift in Sources */,
+				02F6797E2A03E4F00050CAE7 /* AppDelegate.swift in Sources */,
 				02CCF4082A02050700401C16 /* MulticastDelegate.swift in Sources */,
 				02F893CA2A01468D006FEE7C /* AppSettings.swift in Sources */,
 				02F893B42A010645006FEE7C /* NotionTimerApp.swift in Sources */,
