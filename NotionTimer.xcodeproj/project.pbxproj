@@ -11,6 +11,18 @@
 		02CCF4032A01E2EB00401C16 /* FloatingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCF4022A01E2EB00401C16 /* FloatingPanel.swift */; };
 		02CCF4062A02034D00401C16 /* StopwatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCF4052A02034D00401C16 /* StopwatchViewModel.swift */; };
 		02CCF4082A02050700401C16 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCF4072A02050700401C16 /* MulticastDelegate.swift */; };
+		02F16BBA2A091BEB00D79A7B /* WebSocketServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F16BB92A091BEB00D79A7B /* WebSocketServer.swift */; };
+		02F16BBD2A091C2A00D79A7B /* NIO in Frameworks */ = {isa = PBXBuildFile; productRef = 02F16BBC2A091C2A00D79A7B /* NIO */; };
+		02F16BBF2A091C2A00D79A7B /* NIOConcurrencyHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 02F16BBE2A091C2A00D79A7B /* NIOConcurrencyHelpers */; };
+		02F16BC12A091C2A00D79A7B /* NIOCore in Frameworks */ = {isa = PBXBuildFile; productRef = 02F16BC02A091C2A00D79A7B /* NIOCore */; };
+		02F16BC32A091C2A00D79A7B /* NIOEmbedded in Frameworks */ = {isa = PBXBuildFile; productRef = 02F16BC22A091C2A00D79A7B /* NIOEmbedded */; };
+		02F16BC52A091C2A00D79A7B /* NIOFoundationCompat in Frameworks */ = {isa = PBXBuildFile; productRef = 02F16BC42A091C2A00D79A7B /* NIOFoundationCompat */; };
+		02F16BC72A091C2A00D79A7B /* NIOHTTP1 in Frameworks */ = {isa = PBXBuildFile; productRef = 02F16BC62A091C2A00D79A7B /* NIOHTTP1 */; };
+		02F16BC92A091C2A00D79A7B /* NIOPosix in Frameworks */ = {isa = PBXBuildFile; productRef = 02F16BC82A091C2A00D79A7B /* NIOPosix */; };
+		02F16BCB2A091C2A00D79A7B /* NIOTLS in Frameworks */ = {isa = PBXBuildFile; productRef = 02F16BCA2A091C2A00D79A7B /* NIOTLS */; };
+		02F16BCD2A091C2A00D79A7B /* NIOTestUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 02F16BCC2A091C2A00D79A7B /* NIOTestUtils */; };
+		02F16BCF2A091C2A00D79A7B /* NIOWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 02F16BCE2A091C2A00D79A7B /* NIOWebSocket */; };
+		02F16BD12A091C2A00D79A7B /* _NIOConcurrency in Frameworks */ = {isa = PBXBuildFile; productRef = 02F16BD02A091C2A00D79A7B /* _NIOConcurrency */; };
 		02F6797E2A03E4F00050CAE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F6797D2A03E4F00050CAE7 /* AppDelegate.swift */; };
 		02F893B42A010645006FEE7C /* NotionTimerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F893B32A010645006FEE7C /* NotionTimerApp.swift */; };
 		02F893B82A010647006FEE7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02F893B72A010647006FEE7C /* Assets.xcassets */; };
@@ -25,6 +37,7 @@
 		02CCF4022A01E2EB00401C16 /* FloatingPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanel.swift; sourceTree = "<group>"; };
 		02CCF4052A02034D00401C16 /* StopwatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchViewModel.swift; sourceTree = "<group>"; };
 		02CCF4072A02050700401C16 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
+		02F16BB92A091BEB00D79A7B /* WebSocketServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketServer.swift; sourceTree = "<group>"; };
 		02F6797D2A03E4F00050CAE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02F893B02A010645006FEE7C /* NotionTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotionTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02F893B32A010645006FEE7C /* NotionTimerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotionTimerApp.swift; sourceTree = "<group>"; };
@@ -41,12 +54,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02F16BC12A091C2A00D79A7B /* NIOCore in Frameworks */,
+				02F16BC52A091C2A00D79A7B /* NIOFoundationCompat in Frameworks */,
+				02F16BD12A091C2A00D79A7B /* _NIOConcurrency in Frameworks */,
+				02F16BCD2A091C2A00D79A7B /* NIOTestUtils in Frameworks */,
+				02F16BC92A091C2A00D79A7B /* NIOPosix in Frameworks */,
+				02F16BBD2A091C2A00D79A7B /* NIO in Frameworks */,
+				02F16BCF2A091C2A00D79A7B /* NIOWebSocket in Frameworks */,
+				02F16BC72A091C2A00D79A7B /* NIOHTTP1 in Frameworks */,
+				02F16BBF2A091C2A00D79A7B /* NIOConcurrencyHelpers in Frameworks */,
+				02F16BC32A091C2A00D79A7B /* NIOEmbedded in Frameworks */,
+				02F16BCB2A091C2A00D79A7B /* NIOTLS in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02F16BB82A091BCF00D79A7B /* WebSocket */ = {
+			isa = PBXGroup;
+			children = (
+				02F16BB92A091BEB00D79A7B /* WebSocketServer.swift */,
+			);
+			name = WebSocket;
+			sourceTree = "<group>";
+		};
 		02F679742A03E4060050CAE7 /* Stopwatch */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +142,7 @@
 				02F893B92A010647006FEE7C /* Preview Content */,
 				02F6797B2A03E4940050CAE7 /* Settings */,
 				02F679742A03E4060050CAE7 /* Stopwatch */,
+				02F16BB82A091BCF00D79A7B /* WebSocket */,
 			);
 			path = NotionTimer;
 			sourceTree = "<group>";
@@ -139,6 +172,17 @@
 			);
 			name = NotionTimer;
 			packageProductDependencies = (
+				02F16BBC2A091C2A00D79A7B /* NIO */,
+				02F16BBE2A091C2A00D79A7B /* NIOConcurrencyHelpers */,
+				02F16BC02A091C2A00D79A7B /* NIOCore */,
+				02F16BC22A091C2A00D79A7B /* NIOEmbedded */,
+				02F16BC42A091C2A00D79A7B /* NIOFoundationCompat */,
+				02F16BC62A091C2A00D79A7B /* NIOHTTP1 */,
+				02F16BC82A091C2A00D79A7B /* NIOPosix */,
+				02F16BCA2A091C2A00D79A7B /* NIOTLS */,
+				02F16BCC2A091C2A00D79A7B /* NIOTestUtils */,
+				02F16BCE2A091C2A00D79A7B /* NIOWebSocket */,
+				02F16BD02A091C2A00D79A7B /* _NIOConcurrency */,
 			);
 			productName = NotionTimer;
 			productReference = 02F893B02A010645006FEE7C /* NotionTimer.app */;
@@ -169,6 +213,7 @@
 			);
 			mainGroup = 02F893A72A010645006FEE7C;
 			packageReferences = (
+				02F16BBB2A091C2A00D79A7B /* XCRemoteSwiftPackageReference "swift-nio" */,
 			);
 			productRefGroup = 02F893B12A010645006FEE7C /* Products */;
 			projectDirPath = "";
@@ -200,6 +245,7 @@
 				02F893C62A01134B006FEE7C /* Stopwatch.swift in Sources */,
 				02CCF4032A01E2EB00401C16 /* FloatingPanel.swift in Sources */,
 				02F6797E2A03E4F00050CAE7 /* AppDelegate.swift in Sources */,
+				02F16BBA2A091BEB00D79A7B /* WebSocketServer.swift in Sources */,
 				02CCF4082A02050700401C16 /* MulticastDelegate.swift in Sources */,
 				02F893CA2A01468D006FEE7C /* AppSettings.swift in Sources */,
 				02F893B42A010645006FEE7C /* NotionTimerApp.swift in Sources */,
@@ -400,6 +446,75 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		02F16BBB2A091C2A00D79A7B /* XCRemoteSwiftPackageReference "swift-nio" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-nio.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		02F16BBC2A091C2A00D79A7B /* NIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02F16BBB2A091C2A00D79A7B /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIO;
+		};
+		02F16BBE2A091C2A00D79A7B /* NIOConcurrencyHelpers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02F16BBB2A091C2A00D79A7B /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOConcurrencyHelpers;
+		};
+		02F16BC02A091C2A00D79A7B /* NIOCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02F16BBB2A091C2A00D79A7B /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOCore;
+		};
+		02F16BC22A091C2A00D79A7B /* NIOEmbedded */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02F16BBB2A091C2A00D79A7B /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOEmbedded;
+		};
+		02F16BC42A091C2A00D79A7B /* NIOFoundationCompat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02F16BBB2A091C2A00D79A7B /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOFoundationCompat;
+		};
+		02F16BC62A091C2A00D79A7B /* NIOHTTP1 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02F16BBB2A091C2A00D79A7B /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOHTTP1;
+		};
+		02F16BC82A091C2A00D79A7B /* NIOPosix */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02F16BBB2A091C2A00D79A7B /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOPosix;
+		};
+		02F16BCA2A091C2A00D79A7B /* NIOTLS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02F16BBB2A091C2A00D79A7B /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOTLS;
+		};
+		02F16BCC2A091C2A00D79A7B /* NIOTestUtils */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02F16BBB2A091C2A00D79A7B /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOTestUtils;
+		};
+		02F16BCE2A091C2A00D79A7B /* NIOWebSocket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02F16BBB2A091C2A00D79A7B /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOWebSocket;
+		};
+		02F16BD02A091C2A00D79A7B /* _NIOConcurrency */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02F16BBB2A091C2A00D79A7B /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = _NIOConcurrency;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 02F893A82A010645006FEE7C /* Project object */;
 }

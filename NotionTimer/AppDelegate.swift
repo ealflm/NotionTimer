@@ -8,8 +8,10 @@
 import SwiftUI
 import AppKit
 
-class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDelegate, AppSettingsDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDelegate, AppSettingsDelegate, WebSocketServerDelegate {
     @ObservedObject private var appSettings = AppSettings.shared
+    
+    var webSocketServer = WebSocketServer()
         
     private let marginRight: CGFloat = 16
     private let marginTop: CGFloat = 42
@@ -22,11 +24,45 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, StopwatchDel
 
     // MARK: - ApplicationDidFinishLaunching
     func applicationDidFinishLaunching(_ notification: Notification) {
-        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        setupWebSocketServer()
+        setupStatusItem()
         setupMenu()
         setupStopwatch()
         setupOverlay()
         setupAppSettings()
+    }
+    
+    // MARK: - ApplicationWillTerminate
+    func applicationWillTerminate(_ aNotification: Notification) {
+        // Stop WebSocketServer
+        try? webSocketServer.group?.syncShutdownGracefully()
+    }
+    
+    // MARK: - WebSocketServer
+    func setupWebSocketServer() {
+        DispatchQueue.global(qos: .background).async {
+            self.webSocketServer.startServer(delegate: self) { result in
+                switch result {
+                case .success(let message):
+                    print(message)
+                case .failure(let error):
+                    print("Error starting the server: \(error)")
+                }
+            }
+        }
+    }
+    
+    func sendMessage(_ message: String) {
+        webSocketServer.broadcastMessage(message)
+    }
+    
+    func didReceiveMessage(_ message: String) {
+        print("Received message: \(message)")
+    }
+    
+    // MARK: - Setup status item
+    func setupStatusItem() {
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     }
     
     // MARK: - Setup panel
