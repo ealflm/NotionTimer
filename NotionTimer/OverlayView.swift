@@ -14,13 +14,13 @@ struct OverlayView: View {
         let frameWidth = viewModel.description.count <= 5 ? 200 : 287
         
         ZStack {
-            Color.black.opacity(0.2)
+            Color.black.opacity(0.5)
                 .frame(width: CGFloat(frameWidth))
                 .frame(height: 80)
                 .cornerRadius(10)
             
             Text(viewModel.description)
-                .font(.custom("Courier New", size: 48))
+                .font(.custom("DroidSansM Nerd Font", size: 48))
                 .multilineTextAlignment(.center)
                 .padding()
                 .foregroundColor(.white)
